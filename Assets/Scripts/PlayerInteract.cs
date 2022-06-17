@@ -17,6 +17,9 @@ public class PlayerInteract : MonoBehaviour
         if(other.gameObject.CompareTag("Interact"))
         {
             other.gameObject.GetComponent<Action>().HideHint();
-        }
+        }       
     }
 }
+//use new input system
+//Tag "interact" into String var
+//rename "other"
