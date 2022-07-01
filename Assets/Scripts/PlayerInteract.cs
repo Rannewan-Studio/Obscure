@@ -1,22 +1,48 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    private void OnTriggerStay(Collider other)
+    [SerializeField] private LayerMask _interactableLayer;
+    [SerializeField] private Transform _rayStartPoint;
+    [SerializeField] private float _maxInteractDistance;
+    private Interactable _interactable;
+    private bool _canInteract;
+
+    private void Update()
     {
-        if(other.gameObject.CompareTag("Interact")) //Проверка на тег предмета с которым можно взаимодействовать
+        RaycastHit hit;
+        _canInteract = Physics.Raycast(_rayStartPoint.position, _rayStartPoint.forward, out hit, _maxInteractDistance, _interactableLayer);
+
+        if(_canInteract)
         {
-            other.gameObject.GetComponent<Action>().ShowHint(); //Показываем подсказку
-            if(Input.GetKey(KeyCode.F)) //Проверка на нажатие кнопки F
-                other.gameObject.GetComponent<Action>().OpenMenu(); //Выполнение какой то функции, в данном случаи открыть меню
+            _interactable = hit.collider.GetComponent<Interactable>();
+            _interactable.Hint.Show();
+        }
+
+        if(!_canInteract && _interactable != null)
+        {
+            _interactable.Hint.Hide();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnInteract(InputAction.CallbackContext context)
     {
-        if(other.gameObject.CompareTag("Interact"))
+        if(context.performed)
         {
-            other.gameObject.GetComponent<Action>().HideHint();
+            if(_canInteract)
+            {
+                if(_interactable.LastInteractState == "Positive")
+                {
+                    _interactable.OnPositiveInteract.Invoke();
+                    _interactable.LastInteractState = "Negative";  
+                }
+                else if(_interactable.LastInteractState == "Negative")
+                {
+                    _interactable.OnNegativeInteract.Invoke();
+                    _interactable.LastInteractState = "Positive";
+                }
+            }
         }
     }
 }
