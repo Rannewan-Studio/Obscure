@@ -1,0 +1,4 @@
+#Fri Jul 15 18:45:14 UZT 2022
+base.0=C\:\\Users\\Mansur\\GitProjects\\Obscure\\Library\\Bee\\Android\\Prj\\Mono2x\\Gradle\\launcher\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

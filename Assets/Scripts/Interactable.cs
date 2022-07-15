@@ -3,11 +3,26 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    // Выполнение положительного действия
+    private PlayerInteractor _playerInteractor;
     public UnityEvent OnPositiveInteract;
-    // Выполнение отрицательного действия
     public UnityEvent OnNegativeInteract;
     public Hint Hint;
-    // Состояние последнего взаимодействия
-    [HideInInspector] public string LastInteractState = "Negative";
+    [HideInInspector] public enum InteractState {Negative, Positive}
+    [HideInInspector] public InteractState LastInteractState = InteractState.Negative;
+
+    private void Start()
+    {
+        _playerInteractor = FindObjectOfType<PlayerInteractor>();
+    }
+
+    private void OnMouseDown()
+    {
+        if(_playerInteractor.InteractableObject != null)
+        {
+            _playerInteractor.InteractableObject.Hint.Hide();
+        }
+        _playerInteractor.InteractableObject = this;
+        _playerInteractor.CanInteract = true;
+        Hint.Show();
+    }
 }
