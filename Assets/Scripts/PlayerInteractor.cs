@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractor : MonoBehaviour
 {
-    [SerializeField] private float _maxInteractDistance;
     [HideInInspector] public Interactable InteractableObject;
     [HideInInspector] public bool CanInteract;
+    [SerializeField] private float _maxInteractDistance;
 
     private void Update()
     {

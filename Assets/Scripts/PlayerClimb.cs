@@ -30,7 +30,6 @@ public class PlayerClimb : MonoBehaviour
         Vector2 climbInput = _playerInput.actions["Move"].ReadValue<Vector2>();
         if(_canClimb && climbInput != Vector2.zero)
         {
-            // _playerMovement.PlayerVelocity.y = Mathf.Sqrt(_climbSpeed * 51);
             _playerMovement.PlayerVelocity.y = _climbSpeed;
         }
     }
