@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour
     public UnityEvent OnNegativeInteract;
     public Hint Hint;
     [HideInInspector] public enum InteractState {Negative, Positive}
-    [HideInInspector] public InteractState LastInteractState = InteractState.Negative;
+    public InteractState LastInteractState = InteractState.Negative;
 
     private void Start()
     {

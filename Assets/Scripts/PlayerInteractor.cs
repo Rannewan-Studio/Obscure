@@ -28,12 +28,12 @@ public class PlayerInteractor : MonoBehaviour
             {
                 if(InteractableObject.LastInteractState == Interactable.InteractState.Positive)
                 {
-                    InteractableObject.OnPositiveInteract.Invoke();
+                    InteractableObject.OnNegativeInteract.Invoke();
                     InteractableObject.LastInteractState = Interactable.InteractState.Negative;  
                 }
                 else if(InteractableObject.LastInteractState == Interactable.InteractState.Negative)
                 {
-                    InteractableObject.OnNegativeInteract.Invoke();
+                    InteractableObject.OnPositiveInteract.Invoke();
                     InteractableObject.LastInteractState = Interactable.InteractState.Positive;
                 }
             }
